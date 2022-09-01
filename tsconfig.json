@@ -18,7 +18,7 @@
     "paths": {
       "@styles/*": ["styles/*"],
       "@features/*": ["features/*"],
-      "@redux/*": ["redux/*"],
+      "@store/*": ["store/*"],
       "@typings": ["typings/*"]
     },
   },
