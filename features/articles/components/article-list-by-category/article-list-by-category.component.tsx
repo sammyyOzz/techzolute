@@ -2,15 +2,26 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Title, VerticalCardsContainer } from "./article-list-by-category.styles";
 import { groupByCategory } from "@features/articles/helpers/article.helpers";
-import { Article } from "@features/articles/types/article.types";
 import { ArticleCardVertical } from "../article-card-vertical/article-card-vertical.component";
+import { useGetArticlesQuery } from "@features/articles/api/article.api";
 
-interface ArticleListByCategoryProps {
-    articles: Array<Article>
-}
 
-export function ArticleListByCategory({ articles }: ArticleListByCategoryProps) {
-    const articlesByCategory = groupByCategory(articles);
+export function ArticleListByCategory() {
+    const { data, error, isLoading } = useGetArticlesQuery({ page: 1, limit: 20, category: '' });
+
+    const articlesByCategory = groupByCategory(data?.items || []);
+
+    if (isLoading) {
+        return (
+            <>Loading...</>
+        )
+    }
+
+    if (error) {
+        return (
+            <>Error:  + {error}</>
+        )
+    }
 
     return (
         <>

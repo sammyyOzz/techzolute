@@ -1,10 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { Page } from '@typings/page.type';
 import { Article } from '../types/article.types'
-
-interface GetArticlesReturn {
-    count: number;
-    articles: Array<Article>;
-}
 
 interface GetArticlesQuery {
     page: number;
@@ -20,7 +16,7 @@ export const articleApi = createApi({
     reducerPath: 'articleApi',
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
-        getArticles: builder.query<GetArticlesReturn, GetArticlesQuery>({
+        getArticles: builder.query<Page<Article>, GetArticlesQuery>({
             query({ page, limit, category }: GetArticlesQuery) {
                 return `/?page=${page}&limit=${limit}&category=${category}`
             },

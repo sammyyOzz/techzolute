@@ -1,4 +1,4 @@
-import { Article } from "../../types";
+import { Article } from "@features/articles/types/article.types";
 import { ArticleCardHorizontal } from "../article-card-horizontal/article-card-horizontal.component";
 import { ArticleCardVertical } from "../article-card-vertical/article-card-vertical.component";
 

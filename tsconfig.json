@@ -19,7 +19,7 @@
       "@styles/*": ["styles/*"],
       "@features/*": ["features/*"],
       "@store/*": ["store/*"],
-      "@typings": ["typings/*"]
+      "@typings/*": ["typings/*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
