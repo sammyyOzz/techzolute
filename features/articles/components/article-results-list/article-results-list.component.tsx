@@ -4,13 +4,14 @@ import { usePaginate } from "@features/pagination/hooks/use-paginate.hook";
 import { ArticleCardHorizontal } from "../article-card-horizontal/article-card-horizontal.component";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo } from "react";
+import { ResultsContainer } from "./article-results-list.styles";
 
 interface ArticleResultsListProps {
     category?: string;
     search?: string;
 }
 
-const limit = 1
+const limit = 5
 
 export function ArticleResultsList({ category = '', search }: ArticleResultsListProps) { 
     const [page, handlePageChange] = usePaginate()
@@ -48,21 +49,25 @@ export function ArticleResultsList({ category = '', search }: ArticleResultsList
     }
 
     return (
-        <>
-            { (data?.items || []).map((article) => (
-                <ArticleCardHorizontal
-                    key={article._id}
-                    { ...article }
-                    large
-                />
-            ))}
+        <ResultsContainer>
+            <div className="results-container">
+                { (data?.items || []).map((article) => (
+                    <ArticleCardHorizontal
+                        key={article._id}
+                        { ...article }
+                        large
+                    />
+                ))}
+            </div>
 
             { isFetching && 'fetching...' }
 
-            <Paginate
-                pageCount={data?.meta.totalPages || 0}
-                handlePageChange={handlePageChange} 
-            />
-        </>
+            <div className="paginate-container">
+                <Paginate
+                    pageCount={data?.meta.totalPages || 0}
+                    handlePageChange={handlePageChange} 
+                />
+            </div>
+        </ResultsContainer>
     )
 }

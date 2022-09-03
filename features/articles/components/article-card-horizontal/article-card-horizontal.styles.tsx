@@ -12,7 +12,7 @@ export const Root = styled.div<any>`
     }
 `
 
-export const Image = styled.img<any>`
+export const Image = styled.img<{ large: boolean }>`
     width: ${p => p.large ? '290px' : '120px'};
     height: ${p => p.large ? '190px' : '90px'};
     object-fit: cover;

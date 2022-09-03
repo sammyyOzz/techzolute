@@ -1,3 +1,5 @@
+import { awesomeGrid } from "./awesome-grid.styles";
+
 type Color = {
     main: string;
     light: string;
@@ -168,6 +170,7 @@ const theme = {
             },
         },
     },
+    awesomegrid: awesomeGrid
 };
 
 
