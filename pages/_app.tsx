@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
         <Layout>
           <Component {...pageProps} />

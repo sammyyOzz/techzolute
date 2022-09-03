@@ -6,6 +6,7 @@ interface GetArticlesQuery {
     page: number;
     limit: number;
     category: string;
+    search?: string;
 }
 
 const baseUrl = process.env.NODE_ENV !== 'production'
@@ -17,8 +18,8 @@ export const articleApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getArticles: builder.query<Page<Article>, GetArticlesQuery>({
-            query({ page, limit, category }: GetArticlesQuery) {
-                return `/?page=${page}&limit=${limit}&category=${category}`
+            query({ page, limit, category, search = '' }: GetArticlesQuery) {
+                return `/?page=${page}&limit=${limit}&category=${category}&search=${search}`;
             },
         }),
         getOneArticle: builder.query<Article, string>({
@@ -29,5 +30,6 @@ export const articleApi = createApi({
 
 export const {
     useGetArticlesQuery,
-    useGetOneArticleQuery
+    useGetOneArticleQuery,
+    usePrefetch
 } = articleApi

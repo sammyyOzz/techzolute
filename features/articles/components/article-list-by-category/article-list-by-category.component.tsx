@@ -12,15 +12,16 @@ export function ArticleListByCategory() {
     const articlesByCategory = groupByCategory(data?.items || []);
 
     if (isLoading) {
-        return (
-            <>Loading...</>
-        )
+        return <>
+            Loading...
+        </>
     }
 
     if (error) {
-        return (
-            <>Error:  + {error}</>
-        )
+        return <>
+            Error:  + {error}
+        </>
+        
     }
 
     return (
