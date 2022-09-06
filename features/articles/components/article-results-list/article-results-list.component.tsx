@@ -7,67 +7,59 @@ import { useCallback, useEffect, useMemo } from "react";
 import { ResultsContainer } from "./article-results-list.styles";
 
 interface ArticleResultsListProps {
-    category?: string;
-    search?: string;
+  category?: string;
+  search?: string;
 }
 
-const limit = 5
+const limit = 5;
 
-export function ArticleResultsList({ category = '', search }: ArticleResultsListProps) { 
-    const [page, handlePageChange] = usePaginate()
-    const prefetchPage = usePrefetch('getArticles')
+export function ArticleResultsList({ category = "", search }: ArticleResultsListProps) {
+  const [page, handlePageChange] = usePaginate();
+  const prefetchPage = usePrefetch("getArticles");
 
-    const query = useMemo(() => ({
-        page, 
-        limit,
-        category,
-        search
-    }), [page, category, search])
+  const query = useMemo(
+    () => ({
+      page,
+      limit,
+      category,
+      search,
+    }),
+    [page, category, search]
+  );
 
-    const { data, error, isLoading, isFetching } = useGetArticlesQuery(query);
+  const { data, error, isLoading, isFetching } = useGetArticlesQuery(query);
 
-    const prefetchNextPage = useCallback(() => {
-        if (data?.meta.hasNextPage) {
-            prefetchPage({ ...query, page: page + 1 })
-        }
-    }, [data?.meta.hasNextPage, query, page, prefetchPage])
-
-    useEffect(() => {
-        prefetchNextPage()
-    }, [prefetchNextPage])
-
-    if (isLoading) {
-        return <>
-            Loading...
-        </>
+  const prefetchNextPage = useCallback(() => {
+    if (data?.meta.hasNextPage) {
+      prefetchPage({ ...query, page: page + 1 });
     }
+  }, [data?.meta.hasNextPage, query, page, prefetchPage]);
 
-    if (error) {
-        return <>
-            Error { error }
-        </>
-    }
+  useEffect(() => {
+    prefetchNextPage();
+  }, [prefetchNextPage]);
 
-    return (
-        <ResultsContainer>
-            <div className="results-container">
-                { (data?.items || []).map((article) => (
-                    <ArticleCardHorizontal
-                        key={article._id}
-                        { ...article }
-                        large
-                    />
-                ))}
-            </div>
+  if (isLoading) {
+    return <>Loading...</>;
+  }
 
-            { isFetching && 'fetching...' }
+  if (error) {
+    return <>Error {error}</>;
+  }
 
-            <div className="paginate-container">
-                <Paginate
-                    pageCount={data?.meta.totalPages || 0}
-                    handlePageChange={handlePageChange} 
-                />
-            </div>
-        </ResultsContainer>
-    )
+  return (
+    <ResultsContainer>
+      <div className="results-container">
+        {(data?.items || []).map((article) => (
+          <ArticleCardHorizontal key={article._id} {...article} large />
+        ))}
+      </div>
+
+      {isFetching && "fetching..."}
+
+      <div className="paginate-container">
+        <Paginate pageCount={data?.meta.totalPages || 0} handlePageChange={handlePageChange} />
+      </div>
+    </ResultsContainer>
+  );
 }

@@ -7,11 +7,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   
   body {
     font-family: Inter, Sans-Serif;
-    color: ${color('text', 'main')};
-    background-color: ${color('background', 'main')}
+    color: ${color("text", "main")};
+    background-color: ${color("background", "main")}
   }
 
   a {
-    color: ${color('text', 'main')};
+    color: ${color("text", "main")};
   }
 `;

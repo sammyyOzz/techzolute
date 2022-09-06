@@ -1,11 +1,11 @@
 // import '../styles/globals.css'
-import { Layout } from '@features/ui/layout/layout.component'
-import { store } from '@store/store'
-import { GlobalStyle } from '@styles/global.styles'
-import { darkTheme, lightTheme } from '@styles/theme.styles'
-import type { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
+import { Layout } from "@features/ui/layout/layout.component";
+import { store } from "@store/store";
+import { GlobalStyle } from "@styles/global.styles";
+import { darkTheme, lightTheme } from "@styles/theme.styles";
+import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Layout>
       </ThemeProvider>
     </Provider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
