@@ -3,7 +3,7 @@ import { Root } from "./navbar.styles";
 
 export function Navbar() {
   return (
-    <Root>
+    <Root data-testid="navbar">
       <Link href="/" passHref>
         <h1>Navbar</h1>
       </Link>
